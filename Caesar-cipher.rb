@@ -4,11 +4,12 @@ def caesar_cipher(message, number)
     "k" => 11, "l" => 12, "m" => 13, "n" => 14, "o" => 15, "p" => 16, "q" => 17, "r" => 18, "s" => 19,
     "t" => 20, "u" => 21, "v" => 21, "w" => 23, "x" => 24, "y" => 25, "z" => 26
   }
-  num1 = []
-  answer = []
-  i = 0
-  message = message.downcase
+  num1 = [] #this will store the converted numbers
+  answer = [] #this will store the final ciphered message
+  i = 0 #for while loop
+  message = message.downcase #make sure that the message is downcased
 
+#this loop will convert the original message into the hash value then add the number and store it in the num1 array
   message.each_char do |char|
     if cipher.include?(char)
       num1 << cipher.fetch(char) + number
@@ -17,6 +18,7 @@ def caesar_cipher(message, number)
     end
   end
 
+#this loop will make sure that numbers are not over 26
   while i < num1.length
       if num1[i].is_a?(Integer) && num1[i] > 26
           temp = num1[i] - 26
@@ -25,6 +27,7 @@ def caesar_cipher(message, number)
     i += 1
   end
 
+#this loop will convert the new numbers to the hash keys and store the keys in the final answer array
   num1.each do |item|
     if item.is_a?(Integer)
     answer << cipher.key(item)
@@ -34,7 +37,7 @@ def caesar_cipher(message, number)
   end
 
 
-return answer.join
+return answer.join #will convert the array to a string
 end
 
 print caesar_cipher("What a string!", 5)
